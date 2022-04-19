@@ -24,7 +24,7 @@ const Banner: FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end">
-      <div className="fixed top-0 left-0 -z-10 h-[95vh] w-screen">
+      <div className="absolute top-0 left-0 -z-10 h-[95vh] w-screen">
         <Image
           src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
           layout="fill"
@@ -40,11 +40,11 @@ const Banner: FC<Props> = (props) => {
       </p>
 
       <div className="flex space-x-4">
-        <button className="bannerButton bg-white text-black">
+        <button className="banner-button bg-white text-black">
           <FaPlay className="w-4 text-black md:w-6" />
           Play
         </button>
-        <button className="bannerButton bg-[gray]/70">
+        <button className="banner-button bg-[#6d6d6e] text-white">
           <InformationCircleIcon className="w-5 md:w-8" />
           More Info
         </button>

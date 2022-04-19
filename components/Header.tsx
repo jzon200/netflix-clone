@@ -23,7 +23,13 @@ const Header: FC = () => {
   }, [])
 
   return (
-    <header className={`${isScrolled && 'bg-[#141414]'}`}>
+    <header
+      className={`${
+        isScrolled
+          ? 'bg-[#141414] transition duration-500'
+          : 'bg-[#14141400] transition duration-500'
+      }`}
+    >
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
           src="https://rb.gy/ulxxee"
@@ -33,7 +39,7 @@ const Header: FC = () => {
         />
 
         <ul className="hidden space-x-4 md:flex">
-          <li className="header-links">Home</li>
+          <li className="header-links font-bold">Home</li>
           <li className="header-links">TV Shows</li>
           <li className="header-links">Movies</li>
           <li className="header-links">New & Popular</li>
