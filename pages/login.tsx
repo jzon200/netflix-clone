@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import useAuth from '../hooks/useAuth'
 
 type Inputs = {
   email: string
@@ -12,23 +13,21 @@ type Inputs = {
 const Login = () => {
   const [login, setLogin] = useState(false)
 
+  const { signIn, signUp } = useAuth()
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>()
 
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     if (login) {
-      // await signIn(email, password)
+      await signIn(email, password)
     } else {
-      // await signUp(email, password)
+      await signUp(email, password)
     }
   }
-
-  console.log(watch('email'))
-  console.log(watch('password'))
 
   return (
     <div className="relative flex h-screen w-screen flex-col md:items-center md:justify-center">
@@ -100,7 +99,7 @@ const Login = () => {
             onClick={() => setLogin(false)}
             className="font-medium text-white"
           >
-            <Link href="#">Sign up now.</Link>
+            Sign up now.
           </button>
         </div>
       </form>
