@@ -24,4 +24,8 @@
   .carousel-control-icon {
     @apply absolute top-0 bottom-0 z-40 m-auto w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100;
   }
+
+  .form-control {
+    @apply w-full rounded bg-[#333] px-5 py-3.5 placeholder-[gray] outline-none;
+  }
 }
