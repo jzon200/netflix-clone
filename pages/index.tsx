@@ -25,8 +25,14 @@ const Home: NextPage<Props> = (props) => {
   const { loading } = useAuth()
   const showModal = useRecoilValue(modalState)
 
+  if (loading) return null
+
   return (
-    <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
+    <div
+      className={`relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] ${
+        showModal && 'overflow-hidden lg:h-screen'
+      }`}
+    >
       <Head>
         <title>Home - Netflix</title>
         <link
@@ -50,7 +56,7 @@ const Home: NextPage<Props> = (props) => {
           <Row title="Documentaries" movies={props.documentaries} />
         </section>
       </main>
-      <Modal></Modal>
+      {showModal && <Modal />}
     </div>
   )
 }
