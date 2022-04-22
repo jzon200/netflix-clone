@@ -1,10 +1,9 @@
+import { getFunctions, httpsCallable } from '@firebase/functions'
 import {
   createCheckoutSession,
   getStripePayments,
 } from '@stripe/firestore-stripe-payments'
-import { getFunctions, httpsCallable } from '@firebase/functions'
 import app from './firebase'
-import { error } from 'console'
 
 const payments = getStripePayments(app, {
   productsCollection: 'products',
@@ -21,5 +20,19 @@ const loadCheckout = async (priceId: string) => {
     .catch((error) => console.log(error.message))
 }
 
-export { loadCheckout }
+const goToBillingPortal = async () => {
+  const instance = getFunctions(app, 'asia-southeast2')
+  const functionsRef = httpsCallable(
+    instance,
+    'ext-firestore-stripe-payments-createPortalLink'
+  )
+
+  await functionsRef({
+    returnUrl: `${window.location.origin}/account`,
+  })
+    .then(({ data }: any) => window.location.assign(data.url))
+    .catch((error) => console.log(error.message))
+}
+
+export { loadCheckout, goToBillingPortal }
 export default payments

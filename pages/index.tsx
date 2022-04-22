@@ -33,7 +33,7 @@ const Home: NextPage<Props> = (props) => {
 
   if (loading || subscription === null) return null
 
-  if (subscription === null) return <Plans products={props.products} />
+  if (!subscription) return <Plans products={props.products} />
 
   return (
     <div

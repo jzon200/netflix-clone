@@ -53,14 +53,13 @@ const Header: FC = () => {
         <SearchIcon className="hidden w-6 sm:inline" />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="w-6" />
-        {/* <Link href="/accounts"> */}
-        <img
-          onClick={() => logout()}
-          src="https://rb.gy/g1pwyx"
-          alt=""
-          className="cursor-pointer rounded"
-        />
-        {/* </Link> */}
+        <Link href="/account">
+          <img
+            src="https://rb.gy/g1pwyx"
+            alt=""
+            className="cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   )

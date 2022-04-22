@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { Product } from '@stripe/firestore-stripe-payments'
 import Head from 'next/head'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, Fragment, useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { loadCheckout } from '../lib/stripe'
 import Table from './Table'
@@ -23,7 +23,7 @@ const Plans: FC<{ products: Product[] }> = ({ products }) => {
   }
 
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>Netflix</title>
         <link
@@ -70,15 +70,15 @@ const Plans: FC<{ products: Product[] }> = ({ products }) => {
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
             {products.map((product) => (
               <div
-                onClick={() => {
-                  setSelectedPlan(product)
-                }}
+                key={product.id}
                 className={`plan-box ${
                   selectedPlan.id === product.id
                     ? 'opacity-100'
                     : 'opacity-60 after:border-none'
                 }`}
-                key={product.id}
+                onClick={() => {
+                  setSelectedPlan(product)
+                }}
               >
                 {product.name}
               </div>
@@ -88,8 +88,8 @@ const Plans: FC<{ products: Product[] }> = ({ products }) => {
           <Table products={products} selectedPlan={selectedPlan} />
 
           <button
-            disabled={!selectedPlan}
-            className={`md-w-[420px] mx-auto w-11/12 rounded bg-[#E50914]
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914]
              py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
                isBillingLoading && 'opacity-60'
              }`}
@@ -103,7 +103,7 @@ const Plans: FC<{ products: Product[] }> = ({ products }) => {
           </button>
         </div>
       </main>
-    </div>
+    </Fragment>
   )
 }
 
