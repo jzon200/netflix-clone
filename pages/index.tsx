@@ -9,6 +9,7 @@ import Modal from '../components/Modal'
 import Plans from '../components/Plans'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
+import useList from '../hooks/useList'
 import useSubscription from '../hooks/useSubscription'
 import payments from '../lib/stripe'
 import { Movie } from '../typings'
@@ -30,6 +31,7 @@ const Home: NextPage<Props> = (props) => {
   const { loading, user } = useAuth()
   const showModal = useRecoilValue(modalState)
   const subscription = useSubscription(user)
+  const list = useList(user?.uid)
 
   if (loading || subscription === null) return null
 
@@ -57,7 +59,10 @@ const Home: NextPage<Props> = (props) => {
           <Row title="Trending Now" movies={props.trendingNow} />
           <Row title="Top Rated" movies={props.topRated} />
           <Row title="Action Thrillers" movies={props.actionMovies} />
+
           {/* My List */}
+          {list.length > 0 && <Row title="My List" movies={list} />}
+
           <Row title="Comedies" movies={props.comedyMovies} />
           <Row title="Scary Movies" movies={props.horrorMovies} />
           <Row title="Romance Movies" movies={props.romanceMovies} />

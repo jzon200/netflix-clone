@@ -1,11 +1,10 @@
-import React, { FC, useEffect, useState } from 'react'
 import { BellIcon, SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import useAuth from '../hooks/useAuth'
+import { FC, useEffect, useState } from 'react'
+import BasicMenu from './BasicMenu'
 
 const Header: FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const { logout } = useAuth()
 
   useEffect(() => {
     // change the isScrolled state if scrolled
@@ -39,6 +38,8 @@ const Header: FC = () => {
           height={100}
           className="cursor-pointer object-contain"
         />
+
+        <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
           <li className="header-links font-bold">Home</li>

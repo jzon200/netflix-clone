@@ -1,11 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { DocumentData } from 'firebase/firestore'
 import { FC, useEffect, useRef, useState } from 'react'
 import { Movie } from '../typings'
 import Thumbnail from './Thumbnail'
 
 type Props = {
   title: string
-  movies: Movie[]
+  movies: Movie[] | DocumentData[]
 }
 
 const Row: FC<Props> = (props) => {
